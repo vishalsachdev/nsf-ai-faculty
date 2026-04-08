@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Using AI to Learn AI — NSF Faculty Development</title>
+<style>
+  :root {
+    --illinois-blue: #13294B;
+    --illinois-orange: #E84A27;
+    --light-bg: #F5F5F5;
+    --white: #FFFFFF;
+    --text: #1a1a1a;
+    --muted: #555;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--illinois-blue);
+    color: var(--white);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--illinois-orange); }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    max-width: 640px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.7;
+  }
+
+  /* Insight bar */
+  .insight {
+    background: var(--illinois-orange);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* Main content */
+  .content {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: var(--illinois-blue);
+    margin-bottom: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 3px solid var(--illinois-orange);
+    display: inline-block;
+  }
+
+  /* Scenario */
+  .scenario {
+    background: var(--light-bg);
+    border-left: 4px solid var(--illinois-orange);
+    border-radius: 6px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .scenario .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--illinois-orange);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .scenario h3 {
+    font-size: 1.2rem;
+    color: var(--illinois-blue);
+    margin-bottom: 0.75rem;
+  }
+  .scenario p { margin-bottom: 0.75rem; color: var(--text); }
+
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 1rem 0;
+  }
+  .steps li {
+    counter-increment: step;
+    padding: 0.6rem 0 0.6rem 2.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    background: var(--illinois-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .steps li strong { color: var(--illinois-blue); }
+
+  .reveal {
+    background: var(--white);
+    border: 2px solid var(--illinois-orange);
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+  }
+  .reveal .tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--illinois-orange);
+    font-weight: 700;
+  }
+
+  /* Scale section */
+  .scale {
+    margin-top: 2.5rem;
+  }
+  .scale-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .scale-card {
+    background: var(--light-bg);
+    border-radius: 6px;
+    padding: 1.25rem;
+    text-align: center;
+  }
+  .scale-card .num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--illinois-orange);
+    line-height: 1;
+  }
+  .scale-card .desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+  /* Gap section */
+  .gap {
+    margin-top: 2.5rem;
+  }
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .comp-card {
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .comp-card.old {
+    background: #f0f0f0;
+    border-top: 3px solid #999;
+  }
+  .comp-card.new {
+    background: #FFF3EE;
+    border-top: 3px solid var(--illinois-orange);
+  }
+  .comp-card h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .comp-card.old h4 { color: #666; }
+  .comp-card.new h4 { color: var(--illinois-orange); }
+  .comp-card ul {
+    list-style: none;
+    font-size: 0.95rem;
+  }
+  .comp-card ul li {
+    padding: 0.25rem 0;
+  }
+  .comp-card ul li::before {
+    content: "→ ";
+    color: var(--muted);
+  }
+  .comp-card.new ul li::before { color: var(--illinois-orange); }
+
+  /* Footer */
+  footer {
+    background: var(--illinois-blue);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+  }
+  footer strong { color: var(--white); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.7rem; }
+    .scale-grid, .comparison { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Using <span>AI</span> to Learn <span>AI</span></h1>
+  <p class="subtitle">A prototype approach for the NSF Faculty AI Professional Development Program — where the medium is the message.</p>
+</div>
+
+<div class="insight">
+  Faculty don't just learn <em>about</em> AI. They learn <em>through</em> AI — by directing an agent, watching it work, and stress-testing the results.
+</div>
+
+<div class="content">
+
+  <h2>The Scenario</h2>
+  <div class="scenario">
+    <div class="label">Walkthrough Example</div>
+    <h3>A Librarian Discovers What AI Actually Sees</h3>
+    <p>David is a reference librarian. He's heard faculty claim that "AI can search all the literature." He wants to understand what's actually happening under the hood.</p>
+
+    <ol class="steps">
+      <li><strong>Ask the agent:</strong> "Build me a small Python script that shows exactly what data a PubMed API query returns for a search on 'CRISPR gene therapy.' Show me the raw fields."</li>
+      <li><strong>Watch it work:</strong> The AI agent (Codex) creates the script in a sandbox, runs it, and displays the results — titles, abstracts, MeSH terms, author lists. No full text.</li>
+      <li><strong>Probe:</strong> "Wait — where's the full text of the articles?" The agent explains: PubMed indexes metadata. Full text lives behind publisher paywalls. AI tools trained on PubMed see titles and abstracts, not the papers themselves.</li>
+      <li><strong>Stress-test:</strong> "So if a student says 'AI reviewed 500 papers on my topic,' what did it actually review?" The agent generates a concrete comparison: what a human reads vs. what the AI actually accessed.</li>
+      <li><strong>Reflect:</strong> David now understands a fundamental limitation he can teach to every student who walks into the library.</li>
+    </ol>
+
+    <div class="reveal">
+      <div class="tag">The learning moment</div>
+      <p style="margin-top:0.5rem;">David didn't read a slide about AI limitations. He <strong>discovered</strong> the limitation himself by directing an AI agent and interrogating its output. The understanding is durable because he built it.</p>
+    </div>
+  </div>
+
+  <h2>How It Works</h2>
+  <div class="scenario" style="border-left-color: var(--illinois-blue);">
+    <p>Faculty interact with an <strong>AI coding agent</strong> (like OpenAI Codex) inside a sandboxed environment. They don't need to know how to code — they describe what they want to see, and the agent builds it live.</p>
+    <p style="margin-bottom:0;">Each module provides <strong>guided prompts</strong> tailored to the faculty member's discipline, designed to surface key insights about how AI works through direct experimentation — not lectures.</p>
+  </div>
+
+  <div class="gap">
+    <h2>The Gap We Fill</h2>
+    <div class="comparison">
+      <div class="comp-card old">
+        <h4>Existing Programs</h4>
+        <ul>
+          <li>Teach how to <em>use</em> AI tools</li>
+          <li>Lecture-based delivery</li>
+          <li>One-size-fits-all content</li>
+          <li>Passive consumption</li>
+        </ul>
+      </div>
+      <div class="comp-card new">
+        <h4>Our Approach</h4>
+        <ul>
+          <li>Teach how AI actually <em>works</em></li>
+          <li>Hands-on agent interaction</li>
+          <li>Adapts to each discipline</li>
+          <li>Discovery through stress-testing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <h2>Why It Scales</h2>
+    <div class="scale-grid">
+      <div class="scale-card">
+        <div class="num">1:1</div>
+        <div class="desc">Every faculty member gets a personalized AI tutor</div>
+      </div>
+      <div class="scale-card">
+        <div class="num">0</div>
+        <div class="desc">Instructor bottleneck — the agent does the heavy lifting</div>
+      </div>
+      <div class="scale-card">
+        <div class="num">50→5K</div>
+        <div class="desc">Same sandbox works for a pilot cohort or national rollout</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>NSF Faculty AI Professional Development Program</strong><br>
+  University of Illinois Urbana-Champaign<br>
+  April 2026 — Concept Prototype
+</footer>
+
+</body>
+</html>
