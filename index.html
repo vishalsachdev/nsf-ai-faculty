@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Using AI to Learn AI — NSF Faculty Development</title>
+<title>Using AI to Learn AI</title>
+<meta name="description" content="A hands-on approach for the AI for Faculty initiative: faculty learn how AI works by directing an AI agent and stress-testing its results.">
 <style>
   :root {
     --illinois-blue: #13294B;
@@ -221,52 +222,101 @@
     .hero h1 { font-size: 1.7rem; }
     .scale-grid, .comparison { grid-template-columns: 1fr; }
   }
+
+  .lede { font-size: 1.05rem; margin-bottom: 2.5rem; }
+  .lede p { margin-bottom: 0.9rem; }
+  .comp-table { width: 100%; border-collapse: collapse; margin: 1.25rem 0 2.5rem; font-size: 0.95rem; }
+  .comp-table th, .comp-table td { text-align: left; vertical-align: top; padding: 0.7rem 0.6rem; border-bottom: 1px solid #ddd; }
+  .comp-table th { color: var(--illinois-blue); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 2px solid var(--illinois-orange); }
+  .comp-table td:first-child { font-weight: 600; color: var(--illinois-blue); width: 38%; }
+  .scale-card .num { font-size: 1.6rem; }
+  footer a { color: var(--white); }
+  @media (max-width: 600px) {
+    .content { padding: 2rem 1rem; }
+    .hero { padding: 3rem 1rem 2.5rem; }
+    .scenario { padding: 1.25rem 1rem; }
+    .comp-table, .comp-table tbody, .comp-table tr, .comp-table td { display: block; width: 100%; }
+    .comp-table thead { display: none; }
+    .comp-table tr { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+    .comp-table td { border: none; padding: 0.2rem 0; }
+    .comp-table td:first-child { width: 100%; }
+  }
 </style>
 </head>
 <body>
 
 <div class="hero">
   <h1>Using <span>AI</span> to Learn <span>AI</span></h1>
-  <p class="subtitle">A prototype approach for the NSF Faculty AI Professional Development Program — where the medium is the message.</p>
+  <p class="subtitle">A hands-on teaching approach for the AI for Faculty initiative: helping faculty in every discipline understand how AI works, so they can use it responsibly in their research and guide the students who already do.</p>
 </div>
 
 <div class="insight">
-  Faculty don't just learn <em>about</em> AI. They learn <em>through</em> AI — by directing an agent, watching it work, and stress-testing the results.
+  Faculty don't just learn <em>about</em> AI. They learn <em>through</em> AI, by directing an agent, watching it work, and stress-testing the results.
 </div>
 
 <div class="content">
 
-  <h2>The Scenario</h2>
+  <div class="lede">
+    <p>The AI for Faculty initiative began at the University of Illinois and is now a joint effort with colleagues at the University of Nebraska toward an NSF proposal. Its focus is faculty education: an interdisciplinary AI curriculum, delivered through institutes and short courses, built into research and graduate training, assessed carefully, and extended nationally.</p>
+    <p>This page sketches one way to teach that curriculum. The goal is not to turn faculty into AI developers. It is to give them enough understanding of how models learn, generalize and fail that they can evaluate AI-based research claims, mentor students, and use AI ethically in their own work.</p>
+  </div>
+
+  <h2>Scenario 1: Supervising Research</h2>
   <div class="scenario">
-    <div class="label">Walkthrough Example</div>
-    <h3>A Librarian Discovers What AI Actually Sees</h3>
-    <p>David is a reference librarian. He's heard faculty claim that "AI can search all the literature." He wants to understand what's actually happening under the hood.</p>
-
+    <div class="label">Walkthrough example</div>
+    <h3>A Faculty Mentor Checks a Student's 94% Accuracy</h3>
+    <p>A social scientist's doctoral student reports that a machine-learning model predicts survey dropout with 94% accuracy. The advisor is not sure what questions to ask.</p>
     <ol class="steps">
-      <li><strong>Ask the agent:</strong> "Build me a small Python script that shows exactly what data a PubMed API query returns for a search on 'CRISPR gene therapy.' Show me the raw fields."</li>
-      <li><strong>Watch it work:</strong> The AI agent (Codex) creates the script in a sandbox, runs it, and displays the results — titles, abstracts, MeSH terms, author lists. No full text.</li>
-      <li><strong>Probe:</strong> "Wait — where's the full text of the articles?" The agent explains: PubMed indexes metadata. Full text lives behind publisher paywalls. AI tools trained on PubMed see titles and abstracts, not the papers themselves.</li>
-      <li><strong>Stress-test:</strong> "So if a student says 'AI reviewed 500 papers on my topic,' what did it actually review?" The agent generates a concrete comparison: what a human reads vs. what the AI actually accessed.</li>
-      <li><strong>Reflect:</strong> David now understands a fundamental limitation he can teach to every student who walks into the library.</li>
+      <li><strong>Ask the agent:</strong> "Make a small fake dataset like my student's survey, train a simple model on it, and show me how accuracy is calculated."</li>
+      <li><strong>Watch it work:</strong> The agent writes and runs the code in a sandbox, then shows the data, the model and the score, step by step.</li>
+      <li><strong>Probe:</strong> "What if I test it on the same rows it trained on?" The score jumps. The advisor sees, with their own eyes, why a held-out test set matters.</li>
+      <li><strong>Stress-test:</strong> "Only 6% of people drop out. What does a model that always says 'stays' score?" About 94%. The headline number now has a baseline.</li>
+      <li><strong>Reflect:</strong> The advisor leaves with three questions for every AI-based result: what was it tested on, what is the baseline, and what would make it fail.</li>
     </ol>
-
     <div class="reveal">
       <div class="tag">The learning moment</div>
-      <p style="margin-top:0.5rem;">David didn't read a slide about AI limitations. He <strong>discovered</strong> the limitation himself by directing an AI agent and interrogating its output. The understanding is durable because he built it.</p>
+      <p style="margin-top:0.5rem;">The advisor didn't read a slide about overfitting. They <strong>produced</strong> it and then caught it. That is the understanding a mentor needs to review a student's methods.</p>
     </div>
+  </div>
+
+  <h2>Scenario 2: Library and Research Integrity</h2>
+  <div class="scenario">
+    <div class="label">Walkthrough example</div>
+    <h3>A Librarian Discovers What AI Actually Sees</h3>
+    <p>A reference librarian hears faculty claim that "AI can search all the literature." They want to know what is actually happening.</p>
+    <ol class="steps">
+      <li><strong>Ask the agent:</strong> "Build a small script that shows exactly what a PubMed query for 'CRISPR gene therapy' returns. Show me the raw fields."</li>
+      <li><strong>Watch it work:</strong> The agent runs the query and shows titles, abstracts, MeSH terms and authors. No full text.</li>
+      <li><strong>Probe:</strong> "Where is the full text?" PubMed indexes metadata; full text often sits behind publisher paywalls.</li>
+      <li><strong>Stress-test:</strong> "So if a student says 'AI reviewed 500 papers,' what did it review?" The agent builds a side-by-side of what a human reads and what the tool accessed.</li>
+      <li><strong>Reflect:</strong> The librarian now has a concrete limitation to teach every student and faculty member they work with.</li>
+    </ol>
   </div>
 
   <h2>How It Works</h2>
   <div class="scenario" style="border-left-color: var(--illinois-blue);">
-    <p>Faculty interact with an <strong>AI coding agent</strong> (like OpenAI Codex) inside a sandboxed environment. They don't need to know how to code — they describe what they want to see, and the agent builds it live.</p>
-    <p style="margin-bottom:0;">Each module provides <strong>guided prompts</strong> tailored to the faculty member's discipline, designed to surface key insights about how AI works through direct experimentation — not lectures.</p>
+    <p>Faculty work with an <strong>AI agent</strong> in a sandboxed environment. They don't need to code. They describe what they want to see, and the agent builds it live.</p>
+    <p style="margin-bottom:0;">Each module pairs a short conceptual foundation with <strong>guided prompts</strong> for the faculty member's discipline, ideally using their own kind of data. Every exercise ends the same way: find where the AI is wrong, and explain why.</p>
   </div>
+
+  <h2>Fit With the Proposal</h2>
+  <table class="comp-table">
+    <thead><tr><th>Proposal component</th><th>How this approach supports it</th></tr></thead>
+    <tbody>
+      <tr><td>Interdisciplinary AI curriculum</td><td>A shared core on how models learn and fail, then discipline modules built from the same exercise pattern.</td></tr>
+      <tr><td>Institutes and short courses</td><td>Exercises run in a 5 to 15 hour course or a multi-day institute. An in-person pilot cohort tests and refines them first.</td></tr>
+      <tr><td>Research-development environments</td><td>Faculty practice on research-shaped data and questions, not generic chatbot demos.</td></tr>
+      <tr><td>Graduate education</td><td>Advisors and their students can work through the same modules, giving them a common vocabulary for reviewing AI methods.</td></tr>
+      <tr><td>Assessing outcomes</td><td>Pre/post concept checks, plus the agent session logs, show what each participant tried, caught and missed.</td></tr>
+      <tr><td>National extension, starting with EPSCoR</td><td>A train-the-trainer model: partner campuses send facilitators, then adapt the modules locally.</td></tr>
+    </tbody>
+  </table>
 
   <div class="gap">
     <h2>The Gap We Fill</h2>
     <div class="comparison">
       <div class="comp-card old">
-        <h4>Existing Programs</h4>
+        <h4>Most Existing Programs</h4>
         <ul>
           <li>Teach how to <em>use</em> AI tools</li>
           <li>Lecture-based delivery</li>
@@ -275,7 +325,7 @@
         </ul>
       </div>
       <div class="comp-card new">
-        <h4>Our Approach</h4>
+        <h4>This Approach</h4>
         <ul>
           <li>Teach how AI actually <em>works</em></li>
           <li>Hands-on agent interaction</li>
@@ -291,15 +341,15 @@
     <div class="scale-grid">
       <div class="scale-card">
         <div class="num">1:1</div>
-        <div class="desc">Every faculty member gets a personalized AI tutor</div>
+        <div class="desc">Each participant directs their own agent, at their own level</div>
       </div>
       <div class="scale-card">
-        <div class="num">0</div>
-        <div class="desc">Instructor bottleneck — the agent does the heavy lifting</div>
+        <div class="num">Pilot first</div>
+        <div class="desc">An in-person cohort tests the modules before wider release</div>
       </div>
       <div class="scale-card">
-        <div class="num">50→5K</div>
-        <div class="desc">Same sandbox works for a pilot cohort or national rollout</div>
+        <div class="num">Train the trainer</div>
+        <div class="desc">Partner campuses adapt and run the modules themselves</div>
       </div>
     </div>
   </div>
@@ -307,9 +357,9 @@
 </div>
 
 <footer>
-  <strong>NSF Faculty AI Professional Development Program</strong><br>
-  University of Illinois Urbana-Champaign<br>
-  April 2026 — Concept Prototype
+  <strong>AI for Faculty: Using AI to Learn AI</strong><br>
+  Concept prototype by <a href="https://giesbusiness.illinois.edu/profile/vishal-sachdev">Vishal Sachdev</a>, Gies College of Business, University of Illinois Urbana-Champaign<br>
+  First posted April 2026. Updated October 2026.
 </footer>
 
 </body>
